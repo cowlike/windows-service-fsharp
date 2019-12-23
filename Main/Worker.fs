@@ -6,13 +6,13 @@ open System.Threading.Tasks
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Logging
 
-let rec doSomeWork (stoppingToken: CancellationToken) (logger: ILogger) =
+let rec doSomeWork count (stoppingToken: CancellationToken) (logger: ILogger) =
   async {
     do! Async.Sleep(1000)
-    logger.LogInformation("Worker running at: {0}", DateTimeOffset.Now)
+    logger.LogInformation("Worker running at: {0} {1}", DateTimeOffset.Now, count)
 
     if (not stoppingToken.IsCancellationRequested) then
-      return! (doSomeWork stoppingToken logger)
+      return! (doSomeWork (count + 1) stoppingToken logger)
     else
       return ()
   }
@@ -22,5 +22,5 @@ type Worker(logger: ILogger<Worker>) =
   let _logger = logger
 
   override this.ExecuteAsync(stoppingToken: CancellationToken) =
-    doSomeWork stoppingToken _logger
+    doSomeWork 0 stoppingToken _logger
     |> Async.StartAsTask :> Task

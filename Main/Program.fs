@@ -11,7 +11,7 @@ let configureLogging (builder: ILoggingBuilder) =
   builder.AddFilter<EventLogLoggerProvider>(fun level -> level >= LogLevel.Information)
   |> ignore
 
-let configureServices (x: HostBuilderContext) (services : IServiceCollection) =
+let configureServices _ (services : IServiceCollection) =
   services.AddHostedService<Worker>()
     .Configure(fun (cfg: EventLogSettings) ->
       cfg.LogName <- "Sample Service"
