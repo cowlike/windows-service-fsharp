@@ -6,8 +6,6 @@ open System.Threading.Tasks
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Logging
 
-type LogMsg = Info of LogLevel * string
-
 let log (logger:ILogger) level msg = logger.Log(level, msg)
 
 let rec doSomeWork count (stoppingToken: CancellationToken) (logger: ILogger) =
