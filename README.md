@@ -1,6 +1,6 @@
 # Overview
 
-This is a sample Windows service using .NET Core 3.1. The code is based off of the [example on this page](https://csharp.christiannagel.com/2019/10/15/windowsservice/) with some minor modifications.
+This is a sample Windows service using .NET Core 3.1 and F#. The code is based off of the [example on this page](https://csharp.christiannagel.com/2019/10/15/windowsservice/). After creating the app using the template steps shown below, I hand converted it to F# since the template doesn't handle that, at least not yet.
 
 ## Creating the service
 

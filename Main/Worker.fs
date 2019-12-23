@@ -6,10 +6,17 @@ open System.Threading.Tasks
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Logging
 
+type LogMsg = Info of LogLevel * string
+
+let log (logger:ILogger) level msg = logger.Log(level, msg)
+
 let rec doSomeWork count (stoppingToken: CancellationToken) (logger: ILogger) =
   async {
     do! Async.Sleep(1000)
-    logger.LogInformation("Worker running at: {0} {1}", DateTimeOffset.Now, count)
+    if count % 5 = 0
+      then (LogLevel.Warning, "ping!")
+      else (LogLevel.Information, sprintf "Worker running at: %A %d" DateTimeOffset.Now count)
+    ||> log logger
 
     if (not stoppingToken.IsCancellationRequested) then
       return! (doSomeWork (count + 1) stoppingToken logger)
