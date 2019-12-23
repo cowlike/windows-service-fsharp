@@ -1,11 +1,11 @@
-module UPrint.Main
+module Sample.Main
 
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.Logging.EventLog
 
-open UPrint.Worker
+open Sample.Worker
 
 let configureLogging (builder: ILoggingBuilder) =
   builder.AddFilter<EventLogLoggerProvider>(fun level -> level >= LogLevel.Information)

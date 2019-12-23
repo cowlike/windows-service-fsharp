@@ -1,4 +1,4 @@
-module UPrint.Worker
+module Sample.Worker
 
 open System
 open System.Threading
