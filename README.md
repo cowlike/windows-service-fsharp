@@ -26,3 +26,15 @@ dotnet publish -r win7-x86 \
     -p:PublishTrimmed=True \
     -p:UseAppHost=True
 ```
+
+## service creation, starting, stopping, etc
+
+Use the `sc` command:
+
+```bash
+sc create “Sample Service” binPath=/c/apps/testapps/workertest/Main.exe
+sc query "Sample Service"
+sc start "Sample Service"
+sc stop "Sample Service"
+sc delete "Sample Service"
+```
